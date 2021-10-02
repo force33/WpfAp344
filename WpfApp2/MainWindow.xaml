@@ -1,0 +1,47 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="ButtonAdd" Click="ButtonAdd_Click" Width="50">Add</Button>
+            <Button x:Name="ButtonDelete" Click="ButtonDelete_Click" Width="50">Delete</Button>
+            <!--<Button x:Name="Form2" Click="Form2_Click" Width="50">Form</Button>-->
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="albums__id" Binding="{Binding albums_id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="albums__name" Binding="{Binding albums_name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="styles__id" Binding="{Binding styles.name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="group__id" Binding="{Binding groups.group_name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="song__id" Binding="{Binding songs.song_name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="year" Binding="{Binding year, StringFormat={}{0:dd MMMM yyyy}}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="file_path">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="Resources/g.png" Height="50"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                
+                                <Button x:Name="ButtonEdit" Click="ButtonEdit_Click">Edit</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

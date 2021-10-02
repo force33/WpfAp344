@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ZMYA2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="albums">
+          <Key>
+            <PropertyRef Name="albums_id" />
+          </Key>
+          <Property Name="albums_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="albums_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="styles_id" Type="int" />
+          <Property Name="group_id" Type="int" />
+          <Property Name="song_id" Type="int" />
+          <Property Name="year" Type="date" />
+          <Property Name="file_path" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="artists">
+          <Key>
+            <PropertyRef Name="artist_id" />
+          </Key>
+          <Property Name="artist_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="artist_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="group_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="artist_id" Type="int" />
+        </EntityType>
+        <EntityType Name="songs">
+          <Key>
+            <PropertyRef Name="song_id" />
+          </Key>
+          <Property Name="song_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="song_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="length" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="styles">
+          <Key>
+            <PropertyRef Name="style_id" />
+          </Key>
+          <Property Name="style_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_albums_groups">
+          <End Role="groups" Type="Self.groups" Multiplicity="0..1" />
+          <End Role="albums" Type="Self.albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="albums">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_albums_songs">
+          <End Role="songs" Type="Self.songs" Multiplicity="0..1" />
+          <End Role="albums" Type="Self.albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="songs">
+              <PropertyRef Name="song_id" />
+            </Principal>
+            <Dependent Role="albums">
+              <PropertyRef Name="song_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_albums_styles">
+          <End Role="styles" Type="Self.styles" Multiplicity="0..1" />
+          <End Role="albums" Type="Self.albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="styles">
+              <PropertyRef Name="style_id" />
+            </Principal>
+            <Dependent Role="albums">
+              <PropertyRef Name="styles_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_groups_artists">
+          <End Role="artists" Type="Self.artists" Multiplicity="0..1" />
+          <End Role="groups" Type="Self.groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artists">
+              <PropertyRef Name="artist_id" />
+            </Principal>
+            <Dependent Role="groups">
+              <PropertyRef Name="artist_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ZMYA2ModelContainer">
+          <EntitySet Name="albums" EntityType="Self.albums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="artists" EntityType="Self.artists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groups" EntityType="Self.groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="songs" EntityType="Self.songs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="styles" EntityType="Self.styles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_albums_groups" Association="Self.FK_albums_groups">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="albums" EntitySet="albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_albums_songs" Association="Self.FK_albums_songs">
+            <End Role="songs" EntitySet="songs" />
+            <End Role="albums" EntitySet="albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_albums_styles" Association="Self.FK_albums_styles">
+            <End Role="styles" EntitySet="styles" />
+            <End Role="albums" EntitySet="albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_groups_artists" Association="Self.FK_groups_artists">
+            <End Role="artists" EntitySet="artists" />
+            <End Role="groups" EntitySet="groups" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZMYA2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="albums">
+          <Key>
+            <PropertyRef Name="albums_id" />
+          </Key>
+          <Property Name="albums_id" Type="Int32" Nullable="false" />
+          <Property Name="albums_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="styles_id" Type="Int32" />
+          <Property Name="group_id" Type="Int32" />
+          <Property Name="song_id" Type="Int32" />
+          <Property Name="year" Type="DateTime" Precision="0" />
+          <Property Name="file_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="groups" Relationship="Self.FK_albums_groups" FromRole="albums" ToRole="groups" />
+          <NavigationProperty Name="songs" Relationship="Self.FK_albums_songs" FromRole="albums" ToRole="songs" />
+          <NavigationProperty Name="styles" Relationship="Self.FK_albums_styles" FromRole="albums" ToRole="styles" />
+        </EntityType>
+        <EntityType Name="artists">
+          <Key>
+            <PropertyRef Name="artist_id" />
+          </Key>
+          <Property Name="artist_id" Type="Int32" Nullable="false" />
+          <Property Name="artist_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="groups" Relationship="Self.FK_groups_artists" FromRole="artists" ToRole="groups" />
+        </EntityType>
+        <EntityType Name="groups">
+          <Key>
+            <PropertyRef Name="group_id" />
+          </Key>
+          <Property Name="group_id" Type="Int32" Nullable="false" />
+          <Property Name="group_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="artist_id" Type="Int32" />
+          <NavigationProperty Name="albums" Relationship="Self.FK_albums_groups" FromRole="groups" ToRole="albums" />
+          <NavigationProperty Name="artists" Relationship="Self.FK_groups_artists" FromRole="groups" ToRole="artists" />
+        </EntityType>
+        <EntityType Name="songs">
+          <Key>
+            <PropertyRef Name="song_id" />
+          </Key>
+          <Property Name="song_id" Type="Int32" Nullable="false" />
+          <Property Name="song_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="albums" Relationship="Self.FK_albums_songs" FromRole="songs" ToRole="albums" />
+          <Property Name="length" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="styles">
+          <Key>
+            <PropertyRef Name="style_id" />
+          </Key>
+          <Property Name="style_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="albums" Relationship="Self.FK_albums_styles" FromRole="styles" ToRole="albums" />
+        </EntityType>
+        <Association Name="FK_albums_groups">
+          <End Role="groups" Type="Self.groups" Multiplicity="0..1" />
+          <End Role="albums" Type="Self.albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groups">
+              <PropertyRef Name="group_id" />
+            </Principal>
+            <Dependent Role="albums">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_albums_songs">
+          <End Role="songs" Type="Self.songs" Multiplicity="0..1" />
+          <End Role="albums" Type="Self.albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="songs">
+              <PropertyRef Name="song_id" />
+            </Principal>
+            <Dependent Role="albums">
+              <PropertyRef Name="song_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_albums_styles">
+          <End Role="styles" Type="Self.styles" Multiplicity="0..1" />
+          <End Role="albums" Type="Self.albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="styles">
+              <PropertyRef Name="style_id" />
+            </Principal>
+            <Dependent Role="albums">
+              <PropertyRef Name="styles_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_groups_artists">
+          <End Role="artists" Type="Self.artists" Multiplicity="0..1" />
+          <End Role="groups" Type="Self.groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artists">
+              <PropertyRef Name="artist_id" />
+            </Principal>
+            <Dependent Role="groups">
+              <PropertyRef Name="artist_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZMYA2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="albums" EntityType="Self.albums" />
+          <EntitySet Name="artists" EntityType="Self.artists" />
+          <EntitySet Name="groups" EntityType="Self.groups" />
+          <EntitySet Name="songs" EntityType="Self.songs" />
+          <EntitySet Name="styles" EntityType="Self.styles" />
+          <AssociationSet Name="FK_albums_groups" Association="Self.FK_albums_groups">
+            <End Role="groups" EntitySet="groups" />
+            <End Role="albums" EntitySet="albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_albums_songs" Association="Self.FK_albums_songs">
+            <End Role="songs" EntitySet="songs" />
+            <End Role="albums" EntitySet="albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_albums_styles" Association="Self.FK_albums_styles">
+            <End Role="styles" EntitySet="styles" />
+            <End Role="albums" EntitySet="albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_groups_artists" Association="Self.FK_groups_artists">
+            <End Role="artists" EntitySet="artists" />
+            <End Role="groups" EntitySet="groups" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ZMYA2ModelContainer" CdmEntityContainer="ZMYA2Entities">
+          <EntitySetMapping Name="albums">
+            <EntityTypeMapping TypeName="ZMYA2Model.albums">
+              <MappingFragment StoreEntitySet="albums">
+                <ScalarProperty Name="albums_id" ColumnName="albums_id" />
+                <ScalarProperty Name="albums_name" ColumnName="albums_name" />
+                <ScalarProperty Name="styles_id" ColumnName="styles_id" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="song_id" ColumnName="song_id" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="artists">
+            <EntityTypeMapping TypeName="ZMYA2Model.artists">
+              <MappingFragment StoreEntitySet="artists">
+                <ScalarProperty Name="artist_id" ColumnName="artist_id" />
+                <ScalarProperty Name="artist_name" ColumnName="artist_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groups">
+            <EntityTypeMapping TypeName="ZMYA2Model.groups">
+              <MappingFragment StoreEntitySet="groups">
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="group_name" ColumnName="group_name" />
+                <ScalarProperty Name="artist_id" ColumnName="artist_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="songs">
+            <EntityTypeMapping TypeName="ZMYA2Model.songs">
+              <MappingFragment StoreEntitySet="songs">
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="song_id" ColumnName="song_id" />
+                <ScalarProperty Name="song_name" ColumnName="song_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="styles">
+            <EntityTypeMapping TypeName="ZMYA2Model.styles">
+              <MappingFragment StoreEntitySet="styles">
+                <ScalarProperty Name="style_id" ColumnName="style_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
